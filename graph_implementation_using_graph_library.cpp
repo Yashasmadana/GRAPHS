@@ -20,7 +20,10 @@ int main()
     g.addEdge(4, 3);
     g.addEdge(3, 5);
     g.addEdge(0, 6);
-    g.BFS(4);
 
+    // implementing BFS with the starting node here(4);
+    g.BFS(4);
+    //implementing BFS with the starting node here(0);
+    g.DFS(0)
     return 0;
 }
