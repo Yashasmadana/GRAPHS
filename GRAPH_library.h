@@ -9,8 +9,10 @@ class Graph
 {
 public:
     map<int, bool> visited;
+    map<int, bool> topvisited; // for topological sorting im just making it separately so that i can use both topological sorting and dfs in same the program
     map<int, list<int>> adj;
     queue<int> q;
+    stack<int> s; // for topological sorting
 
     // Function to add an edge to graph
     void addEdge(int v, int w);
@@ -19,6 +21,10 @@ public:
     // reachable from v
     void DFS(int v);
     void BFS(int v);
+// for topological sorting
+void topologicalSort(int v);
+void topdfs(int v, stack<int> &s);
+
 
     void dir_addEdge(int v, int w);
 };
@@ -74,5 +80,36 @@ void Graph::DFS(int v)
     for (i = adj[v].begin(); i != adj[v].end(); ++i)
         if (!visited[*i])
             DFS(*i);
+}
+
+void Graph::topologicalSort(int v)
+{
+
+    if (!topvisited[v])
+    {
+        topdfs(v, s);
+    }
+    while (!s.empty())
+    {
+        cout << s.top() << "->";
+        s.pop();
+    }
+}
+
+void Graph::topdfs(int v, stack<int> &s)
+{
+    // Mark the current node as visited and
+    // print it
+    topvisited[v] = true;
+    
+    for (int neighbour : adj[v])
+    {
+        if (!topvisited[neighbour])
+        {
+            topdfs(neighbour, s);
+        }
+    }
+
+    s.push(v);
 }
 #endif
