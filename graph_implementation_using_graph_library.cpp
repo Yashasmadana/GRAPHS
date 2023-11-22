@@ -24,6 +24,7 @@ int main()
     // implementing BFS with the starting node here(4);
     g.BFS(4);
     //implementing BFS with the starting node here(0);
-    g.DFS(0)
+    g.DFS(0);
+    g.topologicalSort(0);
     return 0;
 }
